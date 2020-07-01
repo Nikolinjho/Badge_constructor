@@ -1,0 +1,230 @@
+@import "./lib/reset.css";
+/* vars */
+
+@import './bem-blocks/variables.css';
+/* mixin'ы */
+
+@import "./bem-blocks/mixins.css";
+/* main code */
+
+/* @import "./bem-blocks/header.css" ; */
+
+@import "./bem-blocks/bem-content.css";
+/* @import "./bem-blocks/footer.css" ; */
+
+/* badge */
+
+@import "./bem-blocks/bem-badge.css";
+/* links, btns */
+
+@import "./bem-blocks/bem-btn.css";
+@import './bem-blocks/bem-print.css';
+@import "./bem-blocks/bem-result.css";
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    padding: 0px;
+    margin: 0;
+    font-family: $font;
+    font-size: 16px;
+    min-height: 100%;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+}
+
+.site-carcass {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+    &__container {
+        padding-top: 47px;
+        padding-left: 35px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.text {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.arrow {
+    display: block;
+    position: absolute;
+    right: 21px;
+    top: 22px;
+    background: svg-load(../img/arrow.svg);
+    background-size: contain;
+    width: 10px;
+    height: 5px;
+}
+
+.red {
+    color: $red;
+}
+
+.green {
+    color: $green-dark;
+}
+
+.active {
+    .list {
+        display: block;
+    }
+    .arrow {
+        transform: rotate(180deg);
+    }
+}
+
+.brand {
+    display: none;
+    &__active {
+        display: block;
+    }
+}
+
+.print-title{
+    font-weight: bold;
+}
+.print-text {
+    font-size: 13px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.b{
+    font-weight: 500;
+}
+
+.default {
+    &::after {
+        background: #E10718;
+    }
+    .badge__image {
+        background-image:  svg-load('../img/default.svg');
+        width: 46.23px;
+        height: 26.54px;
+    }
+    .badge__pos {
+        color: rgba(45, 45, 45, 0.6);
+    }
+    .badge__name {
+        color: $black-lighter;
+    }
+}
+
+.dyson {
+    &::after {
+        background: $dyson-dark;
+    }
+    .badge__image { 
+        background-image: svg-load('img/dyson.svg');
+        width: 66.18px;
+        height: 25px;
+    }
+    .badge__pos, .badge__name {
+        color: $dyson-dark;
+    }
+}
+
+.huawei {
+    &::after {
+        background: $huawei-red;
+    }
+    .badge__image {
+        background-image: svg-load('../img/huawei.svg');
+        width: 122.73px;
+        height: 25px;
+    }
+    .badge__pos, .badge__name {
+        color: $huawei-red;
+    }
+}
+
+.lg {
+    &::after {
+        background: $lg-red;
+    }
+    .badge__image {
+        background-image: svg-load('../img/lg.svg');
+        width: 59.52px;
+        height: 28.35px;
+    }
+    .badge__pos, .badge__name {
+        color: $lg-red;
+    }
+}
+
+.oppo {
+    &::after {
+        background: $oppo-green;
+    }
+    .badge__image {
+        background-image: svg-load('../img/oppo.svg');
+        width: 75.74px;
+        height: 18px;
+    }
+    .badge__pos, .badge__name {
+        color: $oppo-green;
+    }
+}
+
+.philips {
+    &::after {
+        background: $philips-blue;
+    }
+    .badge__image {
+        background-image: svg-load('../img/philips.svg');
+        width: 98.17px;
+        height: 18px;
+    }
+    .badge__pos, .badge__name {
+        color: $philips-blue;
+    }
+}
+
+.samsung {
+    &::after {
+        background: $samsung-blue;
+    }
+    .badge__image {
+        background-image: svg-load('../img/samsung.svg');
+        width: 98px;
+        height: 15px;
+    }
+    .badge__pos, .badge__name {
+        color: $samsung-blue;
+    }
+}
+
+.sony {
+    &::after {
+        background: $sony-black;
+    }
+    .badge__image {
+        background-image: svg-load('../img/sony.svg');
+        width: 102.21px;
+        height: 18px; 
+    }
+    .badge__pos, .badge__name {
+        color: $sony-black;
+    }
+}

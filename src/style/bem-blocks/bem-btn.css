@@ -1,0 +1,8 @@
+.btn {
+    font-family: $font;
+    font-size: 13px;
+    line-height: 15px;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+}

@@ -1,0 +1,19 @@
+$font: 'Roboto', sans-serif;
+
+
+/* colors */
+$black: #000000;
+$black-lighter: #2D2D2D;
+$white: #ffffff;
+$green: #46CD80;
+$red: #F91D1D;
+$green-dark: #219653;
+
+/* brand colors */
+$dyson-dark:  $black-lighter;
+$huawei-red: #E52428;
+$lg-red: #C3004D;
+$oppo-green: #1EA366;
+$philips-blue: #0B5ED7;
+$samsung-blue: #1E4BC6; 
+$sony-black: $black-lighter;

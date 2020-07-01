@@ -1,0 +1,39 @@
+<div class="print">
+    <div class="print__header">
+        <div class="title">Ваш бэйджик готов!</div>
+        <div class="print-text">Осталось только разрезать его и вставить в держатель.
+            Используйте для этого резак. </div>
+    </div>
+    <div class="print__main">
+        <div class="badges">
+            {% for i in 0..2 %}
+            <div class="badge default">
+                <div class="badge__image">
+                </div>
+                <div class="badge__pos">
+                    Должность
+                </div>
+                <div class="badge__name">Солнце</div>
+                {% if i == 0 %}
+                <div class="badge__scissors"></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="warning">
+            <div class="message-block">
+                <div class="title">+2 дополнительных</div>
+                <div class="print-text">На всякий-всякий случай</div>
+            </div>
+        </div>
+    </div>
+    <div class="print__footer">
+        <div class="print-title">Вы потеряли или у вас нет держателя для бэйджика? </div>
+        <div class="print-text">Подойдите к своему руководителю или его заместителю по этому вопросу.
+            Если вы потеряли свой, то вам придётся заплатить 500₽*, чтобы вам выдали новый.</div>
+        <div class="print-title">Внимание! Указывайте только настоящие данные</div>
+        <div class="print-text">Если это требования будет проинорировано, то нам придётся вам выписать штраф
+            в размере 500₽. <span class="b"> Всё, что вы вводите - записывается.</span></div>
+        <span>*Цена одного держателя обходится нам именно в такую сумму</span>
+    </div>
+</div>

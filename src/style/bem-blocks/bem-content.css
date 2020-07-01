@@ -1,0 +1,119 @@
+/* .page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: white;
+    &__content {
+        padding-top: 47px;
+        padding-left: 35px;
+    }
+} */
+
+.header {
+    &__title {
+        font-size: 24px;
+        line-height: 28px;
+    }
+    &__text {
+        margin-top: 21px;
+        max-width: 413px;
+    }
+}
+
+.main {
+    margin-top: 33px;
+    display: flex;
+}
+
+.builder {
+    padding-right: 64px;
+    &__field {
+        max-width: 320px;
+        .field {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            width: 100%;
+            padding: 14px 0 15px 11px;
+            border: 1px solid #F2F2F2;
+            color: #2D2D2D;
+        }
+        input.field {
+            font-family: $font;
+            outline: none;
+            &::placeholder {
+                color: #BDBDBD;
+            }
+        }
+        &-name {
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+            /* .pos {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 21px;
+            } */
+            .list {
+                display: none;
+                z-index: 1; 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #F2F2F2;
+                padding: 19px 0 18px 11px;
+                &__item {
+                    font-size: 13px;
+                    line-height: 15px;
+                    color: #4F4F4F;
+                    &:not(:first-child) {
+                        margin-top: 12px;
+                    }
+                    &:hover {
+                        font-weight: bold;
+                    }
+                    &-active {
+                        font-weight: bold;
+                    }
+                }
+            }
+            .list_active {
+                display: block;
+            }
+        }
+        &:not(:first-child) {
+            margin-top: 24px;
+        }
+    }
+    &__msg {
+        margin-top: 39px;
+        .title {
+            font-size: 14px;
+            line-height: 16px;
+        }
+        p {
+            margin-top: 16px;
+            max-width: 310px;
+        }
+    }
+}
+
+.preview {
+    &__footer {
+        margin-top: 22px;
+        display: flex;
+        justify-content: space-between;
+        button {
+            opacity: .5;
+            font-weight: 500;
+            width: 137px;
+            height: 34px;
+        }
+        .print {
+            color: $white;
+            border: none;
+            background: $green;
+        }
+    }
+}
