@@ -136,7 +136,7 @@ a {
         background: $dyson-dark;
     }
     .badge__image { 
-        background-image: svg-load('img/dyson.svg');
+        background-image: svg-load('../img/dyson.svg');
         width: 66.18px;
         height: 25px;
     }

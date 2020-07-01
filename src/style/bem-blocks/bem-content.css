@@ -110,7 +110,7 @@
             width: 137px;
             height: 34px;
         }
-        .print {
+        .print-btn {
             color: $white;
             border: none;
             background: $green;
