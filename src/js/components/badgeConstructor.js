@@ -12,7 +12,7 @@ export default function badgeConstructor() {
         badge = document.querySelector('.badge'),
         badgePost = document.querySelector('.badge__pos'),
         badgeName = document.querySelector('.badge__name'),
-        printBtn = document.querySelector('.print')
+        printBtn = document.querySelector('.print-btn')
 
     let inputFlag = false,
         postFlag = false,
@@ -81,7 +81,7 @@ export default function badgeConstructor() {
 
 
     function btnStyle(btn) {
-        if (inputFlag && postFlag && brandFlag) {
+        if (inputFlag && postFlag ) {
             btn.style.opacity = '1';
             btn.onclick = () => {
                 window.print()
