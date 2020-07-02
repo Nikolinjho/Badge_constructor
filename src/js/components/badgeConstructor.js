@@ -8,10 +8,11 @@ export default function badgeConstructor() {
         brandField = document.querySelector('.brand'),
         brandName = document.querySelector('.brand-name'),
         brandListItems = document.querySelectorAll('.brand .list__item'),
-        list = document.querySelector('.list'),
         badge = document.querySelector('.badge'),
-        badgePost = document.querySelector('.badge__pos'),
-        badgeName = document.querySelector('.badge__name'),
+        badges = document.querySelectorAll('.badge'),
+        badgePost = document.querySelectorAll('.badge__pos'),
+        badgeName = document.querySelectorAll('.badge__name'),
+        printBadgeName = document.querySelectorAll('.print .badge__name'),
         printBtn = document.querySelector('.print-btn')
 
     let inputFlag = false,
@@ -45,8 +46,16 @@ export default function badgeConstructor() {
         return new Promise((success, error) => {
             input.addEventListener('input', () => {
                 let text = input.value.trim();
+                if (text.length > 8){
+                    badgeName[0].style.fontSize = '40px';
+                    printBadgeName.forEach((el, index) => {
+                        el.style.fontSize = '3px';
+                    })
+                }
                 !(text.trim() === 0) ? inputFlag = true : inputFlag = false;
-                badgeName.textContent = text;
+                badgeName.forEach((el, index) => {
+                    el.textContent = text;
+                })
                 btnStyle(printBtn);
                 success()
 
@@ -59,7 +68,7 @@ export default function badgeConstructor() {
         return new Promise((success, error) => {
             posField.onclick = () => {
                 toggleClass(posField, 'active');
-                setItem(posField, postListItems, postName, badgePost, badge)
+                setItem(posField, postListItems, postName, badgePost, badge, badges)
                 btnStyle(printBtn);
                 success()
             }
@@ -70,7 +79,7 @@ export default function badgeConstructor() {
         return new Promise((success, error) => {
             brandField.onclick = () => {
                 toggleClass(brandField, 'active');
-                setItem(brandField, brandListItems, brandName, badgePost, badge)
+                setItem(brandField, brandListItems, brandName, badgePost, badge, badges)
                 // brandFlag = true;
                 btnStyle(printBtn);
                 success()
@@ -84,12 +93,14 @@ export default function badgeConstructor() {
         if (inputFlag && postFlag ) {
             btn.style.opacity = '1';
             btn.onclick = () => {
-                window.print()
+                setTimeout(() => {
+                    window.print()                
+                }, 1000);
             }
         }
     }
 
-    function setItem(parent, listItems, label, badgeLabel, badge, {
+    function setItem(parent, listItems, label, badgeLabel, badge, badgeItems, {
         brand = '.brand',
         brandActiveClass = 'brand__active',
         activeClass = 'list__item-active',
@@ -102,7 +113,9 @@ export default function badgeConstructor() {
                 let name = self.textContent;
                 let lastActive = parent.querySelector(`.${activeClass}`);
                 if (self.dataset.value) {
-                    badgeLabel.textContent = name;
+                    badgeLabel.forEach((el, index) => {
+                        el.textContent = name;
+                    })
                     if (!document.querySelector(brand).className.includes(brandActiveClass) && self.dataset.value === value) {
                         addClass(document.querySelector(brand), brandActiveClass);
                     } else {
@@ -113,7 +126,9 @@ export default function badgeConstructor() {
                 }
                 if (self.dataset.logo) {
                     let currentClass = badge.className;
-                    badge.className = currentClass.replace(currentClass, `badge ${self.dataset.logo}`)
+                    badgeItems.forEach((el, index) => {
+                        el.className = currentClass.replace(currentClass, `badge ${self.dataset.logo}`)
+                    })
                 }
                 label.textContent = name;
                 if (lastActive) {
