@@ -18,10 +18,16 @@
 /* links, btns */
 
 @import "./bem-blocks/bem-btn.css";
-@import './bem-blocks/bem-print.css';
 @import "./bem-blocks/bem-result.css";
+@import './bem-blocks/bem-print.css';
+
+
 * {
     box-sizing: border-box;
+    -webkit-print-color-adjust: exact;
+    &:after, &:before {
+        -webkit-print-color-adjust: exact;
+    }
 }
 
 html, body {
@@ -101,16 +107,17 @@ a {
     }
 }
 
-.print-title{
+.print-title {
     font-weight: bold;
 }
+
 .print-text {
     font-size: 13px;
     line-height: 15px;
     color: #000000;
 }
 
-.b{
+.b {
     font-weight: 500;
 }
 
@@ -119,7 +126,7 @@ a {
         background: #E10718;
     }
     .badge__image {
-        background-image:  svg-load('../img/default.svg');
+        background-image: svg-load('../img/default.svg');
         width: 46.23px;
         height: 26.54px;
     }
@@ -135,7 +142,7 @@ a {
     &::after {
         background: $dyson-dark;
     }
-    .badge__image { 
+    .badge__image {
         background-image: svg-load('../img/dyson.svg');
         width: 66.18px;
         height: 25px;
@@ -222,7 +229,7 @@ a {
     .badge__image {
         background-image: svg-load('../img/sony.svg');
         width: 102.21px;
-        height: 18px; 
+        height: 18px;
     }
     .badge__pos, .badge__name {
         color: $sony-black;
