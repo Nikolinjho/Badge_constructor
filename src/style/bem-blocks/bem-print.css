@@ -1,8 +1,16 @@
 @media print {
-    @page :left {
-        margin: 0.5cm;
+    body{
+        margin: 0mm !important; 
     }
-    @page :right {
-        margin: 0.8cm;
-    } 
+    @page{
+        margin: 0cm;
+    }
+    .print{
+        display: flex;
+    }
+
+    .header, .main{
+        display: none;
+    }
+    
 }
