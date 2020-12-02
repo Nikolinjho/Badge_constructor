@@ -1,6 +1,8 @@
 @import "./lib/reset.css";
 /* vars */
 
+@import './bem-blocks/font.css';
+
 @import './bem-blocks/variables.css';
 /* mixin'ы */
 
@@ -50,8 +52,6 @@ body {
     height: 100%;
     background: white;
     &__container {
-        padding-top: 47px;
-        padding-left: 35px;
         display: flex;
         flex-direction: column;
         height: 100%;
@@ -120,24 +120,22 @@ a {
 .b {
     font-weight: 500;
 }
-
+/*
 .default {
-    &::after {
-        background: #E10718;
-    }
-    .badge__image {
+
+     .badge__image {
         background-image: svg-load('../img/default.svg');
         width: 46.23px;
         height: 26.54px;
-    }
+    } 
     .badge__pos {
-        color: rgba(45, 45, 45, 0.6);
+        color: $black-lighter;
     }
     .badge__name {
         color: $black-lighter;
     }
 }
-
+*/
 .dyson {
     &::after {
         background: $dyson-dark;
@@ -167,45 +165,30 @@ a {
 }
 
 .lg {
-    &::after {
-        background: $lg-red;
-    }
     .badge__image {
-        background-image: svg-load('../img/lg.svg');
         width: 59.52px;
         height: 28.35px;
     }
-    .badge__pos, .badge__name {
-        color: $lg-red;
-    }
+
 }
 
 .oppo {
-    &::after {
-        background: $oppo-green;
-    }
+
     .badge__image {
-        background-image: svg-load('../img/oppo.svg');
+
         width: 75.74px;
         height: 18px;
     }
-    .badge__pos, .badge__name {
-        color: $oppo-green;
-    }
+ 
 }
 
 .philips {
-    &::after {
-        background: $philips-blue;
-    }
+
     .badge__image {
-        background-image: svg-load('../img/philips.svg');
         width: 98.17px;
         height: 18px;
     }
-    .badge__pos, .badge__name {
-        color: $philips-blue;
-    }
+
 }
 
 .samsung {

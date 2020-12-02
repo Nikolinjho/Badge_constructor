@@ -2,15 +2,11 @@
     &::after {
         content: '';
         display: block;
-        width: 100%;
-        height: 7.89px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
+       
     }
-    background: white;
+    background: #ffffff;
     position: relative;
-    border: 0.25px solid #C6C6C6;
+    border: 0.25px solid #F2F2F2;
     width: 297px;
     height: 157px;
     padding-left: 17px;
@@ -19,17 +15,33 @@
         position: absolute;
         top: 19.51px;
         left: 19.35px;
+        img{
+            width: 100%;
+            height: 100%;
+        }
     }
     &__pos {
         margin-top: 71px;
         font-size: 14px;
         line-height: 14px;
+        font-family: Muller;
+        color: #BDBDBD;
     }
     &__name {
         margin-top: 5.5px;
+        color: #BDBDBD;
         font-size: 48px;
         font-weight: bold;
         line-height: 55px;
+        font-family: TTCommons;
+    }
+    &__bottom{
+        background: #E10718;
+        width: 100%;
+        height: 7.89px;
+        position: absolute;
+        bottom: 0;
+        left: 0;
     }
 }
 
