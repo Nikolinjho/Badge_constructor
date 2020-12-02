@@ -94,7 +94,7 @@ function htmlTask() {
         .pipe(ignore.exclude(`templates/**/*.html`))
         .pipe(dest(path.build.html));
 }
-// // getting ready style plugins
+//! getting ready style plugins
 function postCSSPlugins() {
     return [
         postcssImport(),
