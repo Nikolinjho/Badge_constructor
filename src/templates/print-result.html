@@ -1,29 +1,32 @@
 <div class="print">
-    <div class="print__header">
-        <div class="title">Ваш бэйджик готов!</div>
-        <div class="print-text">Осталось только разрезать его и вставить в держатель.
-            Используйте для этого резак. </div>
-    </div>
-    <div class="print__main">
-        <div class="badges">
-            {% for i in 0..2 %}
-            <div class="badge default">
-                <div class="badge__image">
-                </div>
-                <div class="badge__pos">
-                    Должность
-                </div>
-                <div class="badge__name">Солнце</div>
-                {% if i == 0 %}
-                <div class="badge__scissors"></div>
-                {% endif %}
-            </div>
-            {% endfor %}
+    <div class="print__body">
+        <div class="print__header">
+            <div class="title">Ваш бэйджик готов!</div>
+            <div class="print-text">Осталось только разрезать его и вставить в держатель.
+                Используйте для этого резак. </div>
         </div>
-        <div class="warning">
-            <div class="message-block">
-                <div class="title">+2 дополнительных</div>
-                <div class="print-text">На всякий-всякий случай</div>
+        <div class="print__main">
+            <div class="badges">
+                {% for i in 0..2 %}
+                <div class="badge default">
+                    <div class="badge__image">
+                        <img src="/img/default@print.jpg" alt="Лого">
+                    </div>
+                    <div class="badge__pos">
+                        Должность
+                    </div>
+                    <div class="badge__name">Солнце</div>
+                    <div class="badge__bottom"></div>
+                    {% if i == 0 %}
+                    <div class="badge__scissors"></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <div class="message-block">
+                    <div class="title">+2 дополнительных</div>
+                    <div class="print-text">На всякий-всякий случай</div>
+                </div>
+
             </div>
         </div>
     </div>

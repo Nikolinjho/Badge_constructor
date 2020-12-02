@@ -6,32 +6,38 @@
 <div class="main" >
     <div class="builder">
         <div class="builder__field">
-            <input type="text" class="field name" placeholder="Солнце">
+            <input type="text" class="field name" placeholder="Ваше имя">
         </div>
         <div class="builder__field">
             <div class="builder__field-name field post">
-                <div class="post-name"> Выберите из списка </div>
+                <div class="name"> Выберите из списка </div>
                 <span class="arrow"></span>
                 <ul class="list">
-                    <li class="list__item" data-value="0" data-logo="default">Менеджер</li>
-                    <li class="list__item" data-value="1" data-logo="default">Кассир</li>
-                    <li class="list__item" data-value="2" data-logo="default">Мерчендайзер</li>
-                    <li class="list__item" data-value="3" >Эксперт</li>
+                    <li class="list__item" data-spec="0"  data-logo="default"   data-color="#2D2D2D" data-border="#E10718"  >Менеджер</li>
+                    <li class="list__item" data-spec="0" data-logo="default"   data-color="#2D2D2D" data-border="#E10718"    >Кассир</li>
+                    <li class="list__item" data-spec="0" data-logo="default"   data-color="#2D2D2D" data-border="#E10718"   >Мерчендайзер</li> 
+                    <li class="list__item" data-spec="0"  data-logo="intellect" data-color="#379cd1" data-border="#379cd1"  >Специалист</li> 
+                    <li class="list__item" data-spec="0"  data-logo="intellect" data-color="#379cd1" data-border="#379cd1"  >Приемщик</li> 
+                    <li class="list__item" data-spec="1"  data-logo="default"   data-color="#2D2D2D" data-border="#E10718" >Эксперт</li>
                 </ul>
             </div>
         </div>
         <div class="builder__field">
             <div class="builder__field-name field brand">
-                <div class="brand-name"> Выберите из списка </div>
+                <div class="name"> Выберите из списка </div>
                 <span class="arrow"></span>
                 <ul class="list">
-                    <li class="list__item" data-logo="dyson">Dyson</li>
-                    <li class="list__item" data-logo="huawei">Huawei</li>
-                    <li class="list__item" data-logo="lg">LG</li>
-                    <li class="list__item" data-logo="oppo">Oppo</li>
-                    <li class="list__item" data-logo="philips">Philips</li>
-                    <li class="list__item" data-logo="samsung">Samsung</li>
-                    <li class="list__item" data-logo="sony">Sony</li>                                
+                    <li class="list__item" data-logo="dyson"   data-color="#2D2D2D" data-border="#2D2D2D" >Dyson</li>
+                    <li class="list__item" data-logo="huawei"   data-color="#E52428" data-border="#E52428" >Huawei</li>
+                    <li class="list__item" data-logo="lg"   data-color="#C3004D" data-border="#C3004D" >LG</li>
+                    <li class="list__item" data-logo="oppo"   data-color="#1EA366" data-border="#1EA366" >Oppo</li>
+                    <li class="list__item" data-logo="philips"   data-color="#0B5ED7" data-border="#0B5ED7" >Philips</li>
+                    <li class="list__item" data-logo="samsung"   data-color="#1E4BC6" data-border="#1E4BC6" >Samsung</li>
+                    <li class="list__item" data-logo="sony"   data-color="#2D2D2D" data-border="#2D2D2D" >Sony</li>
+                    <li class="list__item" data-logo="bosch"   data-color="#2D2D2D" data-border="#2D2D2D" >Bosch</li>
+                    <li class="list__item" data-logo="delonghi"   data-color="#00539C" data-border="#00539C" >DeLonghi</li>
+                    <li class="list__item" data-logo="sharp"   data-color="#ED1C24" data-border="#ED1C24" >Sharp</li>
+                    <li class="list__item" data-logo="hitachi"   data-color="#EF3D43" data-border="#EF3D43" >Hitachi</li>
                 </ul>
             </div>
         </div>
@@ -39,18 +45,20 @@
             <span class="title">Не забудьте перепроверить данные!</span>
             <p class="text">Если ваш ПК не подключен ни к одному
                 из принтеров, то попробуйте скачать бэйджик,
-                попросите и передайте кому-нибудьна печать.
+                попросите и передайте кому-нибудь на печать.
                 Обязательно <span class="green"> на цветном принтере! </span></p>
         </div>
     </div>
     <div class="preview">
         <div class="badge default">
             <div class="badge__image">
+                <img src="./img/default.svg" alt="Лого">
             </div>
             <div class="badge__pos">
                 Должность
             </div>
-            <div class="badge__name">Солнце</div>
+            <div class="badge__name">Ваше имя</div>
+            <div class="badge__bottom"></div>
         </div>
         <div class="preview__footer">
             <button class="print-btn btn">Напечатать</button>
