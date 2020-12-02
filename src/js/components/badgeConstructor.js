@@ -1,142 +1,320 @@
-import { toggleClass, removeClass, addClass } from "./functions";
+// import { toggleClass, removeClass, addClass } from './functions';
 
-export default function badgeConstructor() {
-    const input = document.querySelector(".name"),
-        posField = document.querySelector('.post'),
-        postName = document.querySelector('.post-name'),
-        postListItems = document.querySelectorAll('.post .list__item'),
-        brandField = document.querySelector('.brand'),
-        brandName = document.querySelector('.brand-name'),
-        brandListItems = document.querySelectorAll('.brand .list__item'),
-        badge = document.querySelector('.badge'),
-        badges = document.querySelectorAll('.badge'),
-        badgePost = document.querySelectorAll('.badge__pos'),
-        badgeName = document.querySelectorAll('.badge__name'),
-        printBadgeName = document.querySelectorAll('.print .badge__name'),
-        printBtn = document.querySelector('.print-btn')
+export default class Badge {
+    constructor(input, post, brand, printBtn) {
+        this.inputName = document.querySelector(input);
+        this.post = document.querySelector(post);
+        this.brand = document.querySelector(brand);
+        this.printBtn = document.querySelector(printBtn);
 
-    let inputFlag = false,
-        postFlag = false,
-        brandFlag = false;
+        this.name = '';
+        this.posName = '';
+        this.color = '#2D2D2D';
+        this.borderColor = '#E10718';
+        this.defaultColor = '#2D2D2D';
+        this.defaultName = 'Ваше имя';
 
+        this.nameNodes = document.querySelectorAll('.badge__name');
+        this.fieldNodes = document.querySelectorAll('.builder__field-name');
+        this.listNodes = document.querySelectorAll('.list');
+        this.resNameNode = document.querySelector('.preview .badge__name');
+        this.posNodes = document.querySelectorAll('.badge__pos');
+        this.logoNodes = document.querySelectorAll('.badge__image img');
+        this.borderNodes = document.querySelectorAll('.badge__bottom');
 
+        this.printNode = document.querySelector('.print');
+        this.printNameNodes = this.printNode.querySelectorAll('.badge__name');
+        this.printLogoNodes = this.printNode.querySelectorAll('.badge__image img');
+        // this.printBorder = this.print.querySelector('.badge__bottom')
 
-    try {
-        init();
-    } catch (error) {
-        console.error(error);
-    }
+        this.currentList = null;
+        this.posColor = '#2D2D2D';
 
-    function init() {
-        inputName().then(() => {
-            inputFlag = true;
-            console.log(inputFlag)
-        })
-        setPost().then(() => {
-            postFlag = true;
-            console.log(postFlag)
-        });
-        setBrand().then(() => {
-            brandFlag = true;
-            console.log(brandFlag)
-        });
-    }
-
-    function inputName() {
-        return new Promise((success, error) => {
-            input.addEventListener('input', () => {
-                let text = input.value.trim();
-                if (text.length > 8){
-                    badgeName[0].style.fontSize = '40px';
-                    printBadgeName.forEach((el, index) => {
-                        el.style.fontSize = '3px';
-                    })
-                }
-                !(text.trim() === 0) ? inputFlag = true : inputFlag = false;
-                badgeName.forEach((el, index) => {
-                    el.textContent = text;
-                })
-                btnStyle(printBtn);
-                success()
-
-            })
-        })
-
-    }
-
-    function setPost() {
-        return new Promise((success, error) => {
-            posField.onclick = () => {
-                toggleClass(posField, 'active');
-                setItem(posField, postListItems, postName, badgePost, badge, badges)
-                btnStyle(printBtn);
-                success()
-            }
-        })
-    }
-
-    function setBrand() {
-        return new Promise((success, error) => {
-            brandField.onclick = () => {
-                toggleClass(brandField, 'active');
-                setItem(brandField, brandListItems, brandName, badgePost, badge, badges)
-                // brandFlag = true;
-                btnStyle(printBtn);
-                success()
-            }
-        })
-    }
-
-
-
-    function btnStyle(btn) {
-        if (inputFlag && postFlag ) {
-            btn.style.opacity = '1';
-            btn.onclick = () => {
-                setTimeout(() => {
-                    window.print()                
-                }, 1000);
-            }
+        try {
+            this.init();
+        } catch (e) {
+            throw e;
         }
     }
+    init() {
+        this.setName();
+        this.setPost();
+    }
+    setName() {
+        this.inputName.addEventListener('input', e => {
+            this.name = e.target.value.trim();
 
-    function setItem(parent, listItems, label, badgeLabel, badge, badgeItems, {
-        brand = '.brand',
-        brandActiveClass = 'brand__active',
-        activeClass = 'list__item-active',
-        listItemActiveClass = 'list .list__item-active',
-        value = '3'
-    } = {}) {
-        listItems.forEach((el, index) => {
-            el.onclick = () => {
-                let self = el;
-                let name = self.textContent;
-                let lastActive = parent.querySelector(`.${activeClass}`);
-                if (self.dataset.value) {
-                    badgeLabel.forEach((el, index) => {
-                        el.textContent = name;
-                    })
-                    if (!document.querySelector(brand).className.includes(brandActiveClass) && self.dataset.value === value) {
-                        addClass(document.querySelector(brand), brandActiveClass);
+            if (this.name) {
+                this.nameNodes.forEach(element => {
+                    element.textContent = this.name;
+                    element.style.color = this.color;
+                });
+            } else {
+                this.nameNodes.forEach(element => {
+                    element.textContent = this.defaultName;
+                    element.style.color = null;
+                });
+            }
+
+            if (this.name.length > 8) {
+                this.resNameNode.style.fontSize = '40px';
+                this.printNameNodes.forEach(element => {
+                    element.style.fontSize = '30pt';
+                });
+            } else {
+                this.resNameNode.style.fontSize = null;
+                this.printNameNodes.forEach(element => {
+                    element.style.fontSize = null;
+                });
+            }
+
+            if (this.allowPrint()) {
+                this.setPrint();
+            } else {
+                this.printBtn.style.opacity = 0.5;
+                this.printBtn.removeEventListener('click', this.print);
+            }
+        });
+    }
+    setPost() {
+        this.fieldNodes.forEach(element => {
+            element.addEventListener('click', () => {
+                element.classList.toggle('active');
+                this.currentList = element;
+            });
+        });
+        this.handleList();
+    }
+    handleList() {
+        this.listNodes.forEach(element => {
+            element.addEventListener('click', e => {
+                const item = e.target;
+                const titleNode = this.currentList.parentNode.querySelector('.name');
+                titleNode.dataset.value = item.textContent;
+                item.dataset.color ? (this.color = titleNode.dataset.color) : '';
+                this.posName = item.textContent;
+                titleNode.textContent = this.posName;
+
+                if (this.currentList.classList.contains('post')) {
+                    this.posNodes.forEach(element => {
+                        element.textContent = this.posName;
+                        element.style.color = this.posColor;
+                    });
+                    if (item.dataset.spec === '1') {
+                        this.brand.classList.add('brand__active');
                     } else {
-                        if (document.querySelector(brand).className.includes(brandActiveClass)) {
-                            removeClass(document.querySelector(brand), brandActiveClass)
-                        }
+                        this.brand.classList.remove('brand__active');
                     }
                 }
-                if (self.dataset.logo) {
-                    let currentClass = badge.className;
-                    badgeItems.forEach((el, index) => {
-                        el.className = currentClass.replace(currentClass, `badge ${self.dataset.logo}`)
-                    })
+
+                if (item.dataset.logo) {
+                    this.logoNodes.forEach(element => {
+                        element.src = `../img/${item.dataset.logo}.svg`;
+                    });
+                    this.color = item.dataset.color;
+                    this.borderColor = item.dataset.border
+                    console.log(this.color);
+
+                    if (this.name) {
+                        this.nameNodes.forEach(element => {
+                            element.style.color = this.color;
+                        });
+                    }
+                    this.borderNodes.forEach(element => {
+                        element.style.background = this.borderColor;
+                    });
                 }
-                label.textContent = name;
-                if (lastActive) {
-                    removeClass(lastActive, activeClass);
+
+                if (this.allowPrint()) {
+                    this.setPrint();
+                } else {
+                    this.printBtn.style.opacity = 0.5;
+                    this.printBtn.removeEventListener('click', this.print);
                 }
-                addClass(self, activeClass);
-            }
-        })
+            });
+        });
     }
 
+    print() {
+        window.print();
+    }
+    setPrint() {
+        this.printBtn.style.opacity = 1;
+        this.printBtn.addEventListener('click', this.print);
+    }
+    allowPrint() {
+        if (this.brand.classList.contains('brand__active')) {
+            if (this.name && this.post.querySelector('.name').dataset.value && this.brand.querySelector('.name').dataset.value) {
+                return true;
+            }
+        } else {
+            if (this.name && this.post.querySelector('.name').dataset.value) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
+
+// export default class Badge {
+//     constructor(input, post, brand, printBtn) {
+//         this.inputName = document.querySelector(input);
+//         this.post = document.querySelector(post);
+//         this.brand = document.querySelector(brand);
+//         this.printBtn = document.querySelector(printBtn)
+
+//         this.name = ''
+//         this.posName = ''
+//         this.names = document.querySelectorAll('.badge__name');
+//         this.field = document.querySelectorAll('.builder__field-name');
+//         this.list = document.querySelectorAll('.list');
+//         this.resNode = document.querySelector('.preview .badge__name');
+//         this.resPost = document.querySelectorAll('.badge__pos');
+//         this.resLogo = document.querySelectorAll('.badge__image img');
+//         this.resBorder = document.querySelectorAll('.badge__bottom');
+
+//         this.printNode = document.querySelector('.print');
+//         this.printNameNode = this.printNode.querySelectorAll('.badge__name');
+//         this.printLogo = this.printNode.querySelectorAll('.badge__image img');
+//         // this.printBorder = this.print.querySelector('.badge__bottom')
+
+//         this.currentList = null;
+
+//         try {
+//             this.init();
+//         } catch (e) {
+//             throw e;
+//         }
+//     }
+//     init() {
+//         this.setName();
+//         this.setPost();
+//     }
+//     setName() {
+//         this.inputName.addEventListener('input', () => {
+//             this.name = this.inputName.value.trim();
+//             if (this.name) {
+//                 this.names.forEach(element => {
+//                     element.textContent = this.name;
+//                     element.style.color = '#2D2D2D'
+//                 });
+//             } else {
+//                 this.names.forEach(element => {
+//                     element.textContent = 'Ваше имя';
+//                     element.style.color = null
+//                 });
+//             }
+
+//             if (this.name.length > 8) {
+//                 this.resNode.style.fontSize = '40px';
+//                 this.printNameNode.forEach(element => {
+//                     element.style.fontSize = '30pt';
+//                 });
+//             } else {
+//                 this.resNode.style.fontSize = '48px ';
+//                 this.printNameNode.forEach(element => {
+//                     element.style.fontSize = '35pt';
+//                 });
+//             }
+
+//             if (this.allowPrint()){
+//                 this.setPrint()
+//             } else {
+//                 this.printBtn.style.opacity = 0.5
+//                 this.printBtn.removeEventListener('click', this.print)
+//             }
+//         });
+//     }
+//     setPost() {
+//         this.field.forEach(element => {
+//             element.addEventListener('click', () => {
+//                 element.classList.toggle('active');
+//                 this.currentList = element;
+//             });
+//         });
+//         this.list.forEach(element => {
+//             element.addEventListener('click', e => {
+//                 const item = e.target;
+//                 const posNode = this.currentList.parentNode.querySelector('.name');
+//                 this.posName = item.textContent;
+//                 posNode.textContent = this.posName;
+//                 posNode.dataset.value = this.posName
+//                 posNode.dataset.color = this.posName
+//                 if (this.currentList.classList.contains('post')){
+//                     this.resPost.forEach(element => {
+//                         element.textContent = this.posName;
+//                         element.style.color = '#2D2D2D'
+//                     });
+//                 }
+//                 if (item.dataset.spec == 1) {
+//                     this.brand.classList.add('brand__active');
+//                 } else {
+//                     if (item.dataset.spec == 0) {
+//                         this.brand.classList.remove('brand__active');
+//                     }
+//                 }
+
+//                 if (item.dataset.logo) {
+//                     this.resLogo.forEach(element => {
+//                         element.src = `/img/${item.dataset.logo}${item.dataset.ext}`;
+//                     });
+//                     this.printLogo.forEach(element => {
+//                         element.src = `/img/${item.dataset.logo}@print${item.dataset.ext}`;
+//                     });
+//                     if (this.name){
+//                         this.resNode.style = `color: ${item.dataset.color}`;
+//                         this.printNameNode.forEach(element => {
+//                             element.style = `color: ${item.dataset.color}`;
+//                         });
+//                     }
+//                     this.resBorder.forEach(element => {
+//                         element.style = `background: ${item.dataset.color}`;
+//                     });
+//                 } else {
+//                     this.resLogo.forEach(element => {
+//                         element.src = `/img/default.svg`;
+//                     });
+//                     this.printLogo.forEach(element => {
+//                         element.src = `/img/default@print.svg`;
+//                     });
+//                     if (this.name){
+//                         this.resNode.style.color = '#2D2D2D'
+//                         this.printNameNode.forEach(element => {
+//                             element.style.color = '#2D2D2D'
+//                         });
+
+//                     }
+//                     // this.resBorder.forEach(element => {
+//                     //     element.removeAttribute('style');
+//                     // });
+//                 }
+
+//                 if (this.allowPrint()){
+//                     this.setPrint()
+//                 } else {
+//                     this.printBtn.style.opacity = 0.5
+//                     this.printBtn.removeEventListener('click', this.print)
+//                 }
+//             });
+//         });
+//     }
+//     print(){
+//         window.print()
+//     }
+//     setPrint() {
+//         this.printBtn.style.opacity = 1
+//         this.printBtn.addEventListener('click', this.print)
+//     }
+//     allowPrint(){
+//         if (this.brand.classList.contains('brand__active')){
+//             if (this.name && this.post.querySelector('.name').dataset.value && this.brand.querySelector('.name').dataset.value) {
+//                 return true
+//             }
+//         } else {
+//             if (this.name && this.post.querySelector('.name').dataset.value ) {
+//                 return true
+//             }
+//         }
+//         return false
+//     }
+// }
